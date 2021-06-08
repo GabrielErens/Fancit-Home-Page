@@ -1,0 +1,469 @@
+///*****************Link to soleil font family********************
+@import url("https://p.typekit.net/p.css?s=1&k=byd7hwc&ht=tk&f=17001.17004.17005.22622.22658&a=53108501&app=typekit&e=css");
+
+//************************Color and color function**************************
+$colors: (
+    primary: #220c2c,
+    top-nav: #2c687e,
+    light-purple: #53266a,
+    dark-purple: #351146,
+    light-blue: #2c687e,
+    green: #2e674f,
+    mustard: #886c22,
+    font-color: #ffffff,
+    hover-color: rgba(0, 0, 0, 0.5),
+);
+///here is a function so you don't need to write out map-get for every color
+// function name is color() select color variable as follows
+/// background-color: color(primary) ;
+@function color($color-name) {
+    @return (map-get($colors, $color-name));
+}
+
+//*********************font size function**************************
+
+//this function converts px to rem
+@function toRem($pxValue) {
+    $remConverter: ($pxValue / 16) + rem;
+    @return $remConverter;
+}
+
+// call function toRem() ********do not add px after size *************
+// change font size here
+$font: (
+    h1-size: toRem(66),
+    h2-size: toRem(60),
+    h3-size: toRem(28),
+    h4-size: toRem(24),
+    h5-size: toRem(18),
+    contact: toRem(40),
+    paragraph: toRem(16),
+    p-label: toRem(14),
+    nav-anchor: toRem(16),
+    top-nav: toRem(13),
+    p-legal: toRem(12),
+);
+
+///here is a function so you don't need to write out map-get for every font size
+// function name is fontsSizes() select font variable as follows
+/// Font-size: fontsSizes( h1size) ;
+@function fontsSizes($fontSize) {
+    @return (map-get($font, $fontSize));
+}
+
+//*********************other function**************************
+
+/// Border radius for all boxes
+$border_radius: 20px;
+
+///Line height for paragraphs
+$lineHeight: 1.5;
+
+/// remove all scroll bars from website
+::-webkit-scrollbar{
+    display: none;
+}
+
+
+
+body {
+    padding: 0;
+    background-color: color(primary);
+    color: color(font-color);
+    font-family: "soleil", sans-serif;
+    line-height: 1.5;
+
+
+    & container {
+        margin-left: 75px;
+        margin-right: 75px;
+    }
+}
+
+///mixin variable
+$mobile-view: 1000px;
+
+@mixin mobile {
+    @media (max-width: #{$mobile-view}) {
+        @content;
+    }
+}
+
+.top-nav {
+    background-color: color(top-nav);
+    border-radius: 0 0 $border_radius $border_radius;
+    width: fit-content;
+    margin: 0 0 0 auto;
+    padding: 5px 7px;
+
+    @include mobile {
+        display: none;
+    }
+
+    & a {
+        color: color(font-color);
+        font-size: fontsSizes(top-nav);
+        justify-content: space-between;
+
+        &:hover {
+            color: #ffffff;
+            text-decoration: underline solid 2px;
+        }
+    }
+}
+
+.navbar-toggler {
+    border: solid 2px #fff;
+}
+
+///***********************************main nav****************************
+.navbar > .container,
+.navbar > .container-fluid,
+.navbar > .container-lg,
+.navbar > .container-md,
+.navbar > .container-sm,
+.navbar > .container-xl,
+.navbar > .container-xxl {
+    align-items: flex-end;
+}
+
+.main-nav {
+    background-color: color(primary);
+*{
+    padding: 0;
+} 
+    & #navbarTogglerDemo02 {
+        justify-content: flex-end;
+    }
+
+    & ul {
+        @include mobile {
+            background-color: color(light-purple);
+            border-radius: 0 0 20px 20px;
+            margin-top: toRem(26);
+        }
+    }
+
+    & li {
+        margin-left: 77px;
+       
+
+        @include mobile {
+            display: flex;
+            justify-content: center;
+            margin-top: toRem(20);
+            width: 80%;
+        }
+    }
+
+    & a {
+        color: color(font-color);
+        padding: 0 !important;
+        transition: 1s;
+        font-weight: 600;
+        
+
+        &:hover {
+            color: color(light-purple);
+        }
+    }
+}
+
+///***********************************Hero Section****************************
+
+.hero {
+    margin: 127px auto 6px auto;
+
+    & h1 {
+        font-size: fontsSizes(h1-size);
+        margin: auto 0 auto 0;
+    }
+}
+
+///*********************************about Section ************************
+
+.about {
+    margin-bottom: 141px;
+    display: flex;
+    justify-content: space-between;
+
+    & h4 {
+        font-size: fontsSizes(h4-size);
+        font-weight: 700;
+        margin-bottom: 10%;
+    }
+
+    & p {
+        font-size: fontsSizes(paragraph);
+        line-height: 1.5;
+        font-weight: 600;
+    }
+
+    @include mobile{
+margin: 20%;
+    }
+}
+
+.about__card {
+    
+    
+    &--light-purple {
+        background-color: color(light-purple);
+        border-radius: $border_radius;
+        max-width: toRem(300);
+        padding: 40px 35px 24px 30px;
+        height: toRem(315);
+        overflow: scroll;
+        scrollbar-width: none;
+        margin-right: 1%;
+        margin-left: 1%;
+
+
+        @include mobile{
+            margin-bottom: 5%;
+        }
+    }
+
+    &--green {
+        background-color: color(light-blue);
+        border-radius: $border_radius;
+        max-width: toRem(300);
+        padding: 40px 35px 24px 30px;
+        height: toRem(315);
+        overflow: scroll;
+        scrollbar-width: none;
+        margin-right: 1;
+
+
+        @include mobile{
+            margin-bottom: 5%;
+        }
+    }
+
+    &--mustard {
+        background-color: color(mustard);
+        border-radius: $border_radius;
+        padding: 40px 35px 24px 30px;
+        height: toRem(315);
+        overflow: scroll;
+        scrollbar-width: none;
+        max-width: toRem(300);
+        margin-left: 1%;
+
+        @include mobile{
+            margin-bottom: 2% ;            
+        }
+    }
+}
+///****************************rectangle 7*******************************
+
+.rectangle7 {
+    margin-bottom: 70px;
+
+    &__layout {
+        background-color: color(dark-purple);
+        border-radius: $border_radius;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    & h2 {
+        padding-top: 33px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-size: fontsSizes(h2-size);
+        font-weight: 700;
+    }
+
+    & p {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-bottom: 33px;
+        font-size: fontsSizes(p-label);
+    }
+}
+
+.FANbassadeurs {
+    &__row {
+        background-color: color(light-purple);
+        border-radius: $border_radius;
+
+        margin: auto 0 100px 0;
+    }
+
+    &__card {
+        padding: 60px 80px 0 79px;
+    }
+
+    &__horizontal-line {
+        border-left: solid 1px #fff;
+
+        @include mobile{
+            border-top: solid 1px #fff;
+            border-left: none;
+            margin-top: toRem(50);
+        }
+    }
+
+    & h3 {
+        max-width: toRem(515);
+        font-size: fontsSizes(h3-size);
+    }
+
+    & p {
+        font-size: fontsSizes(p-label);
+    }
+
+    &__btn {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0;
+
+        & button {
+            background-color: color(dark-purple);
+            border: none;
+            color: color(font-color);
+            height: toRem(50);
+            width: toRem(76);
+        }
+    }
+
+    &__btn-1 {
+        border-radius: $border_radius 0 0 0;
+
+    }
+    &__btn-2 {
+        border-radius: 0 0 $border_radius 0;
+
+    }
+}
+
+.contact {
+    margin-bottom: toRem(100);
+
+    & h3 {
+        // width: toRem(484);
+        font-size: fontsSizes(contact);
+    }
+
+    & span {
+        opacity: 0.5;
+    }
+
+    & input {
+        width: 100%;
+        margin-bottom: toRem(20);
+        border-radius: toRem(10);
+        border: none;
+        height: toRem(50);
+        color: color(dark-purple);
+        padding: toRem(15) toRem(24);
+
+        
+    }
+    & input::placeholder {
+        color: color(light-purple);
+        opacity: 0.9;
+        font-weight: 600;
+        font-style: italic;
+    }
+
+    &__btn {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: toRem(20);
+        transition: background-color 1s ease-in;
+    }
+
+    & button {
+        background-color: color(light-purple);
+        padding: toRem(15) toRem(51);
+        border: none;
+        border-radius: $border_radius;
+        color: color(font-color);
+        font-weight: 700;
+        transition: ease-in, 2s;
+    }
+
+    button:hover {
+        background-color: color(dark-purple);
+    }
+}
+
+.footer {
+    background-color: color(dark-purple);
+    height: toRem(214);
+
+    &__rowMargin {
+        justify-content: space-around;
+    }
+
+    & h5 {
+        margin-top: toRem(35);
+        font-size: fontsSizes(h5-size);
+        margin-bottom: toRem(25);
+        @include mobile {
+            display: none;
+        }
+    }
+
+    & p {
+        font-size: fontsSizes(p-label);
+        opacity: 0.9;
+        @include mobile {
+            display: none;
+        }
+    }
+
+    &__professionaleifi {
+        display: flex;
+        align-content: flex-end;
+        max-width: toRem(195);
+        max-height: toRem(29);
+        margin-right: -2.5%;
+        margin-top: toRem(42);
+    }
+
+    &__socialMedia {
+        display: flex;
+        justify-content: flex-end;
+        padding-right: toRem(20);
+
+        & img {
+            margin-left: toRem(26);
+        }
+    }
+
+    & ul {
+        list-style: none;
+        padding: 0;
+        @include mobile {
+            display: none;
+        }
+    }
+
+    & a {
+        text-decoration: none;
+        color: color(font-color);
+    }
+}
+
+.legal {
+    background-color: color(light-purple);
+    padding: 18px 0 18px 75px;
+    max-height:toRem(51) ;
+    @include mobile {
+        display: none;
+    }
+    &__rowMargin {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    & p {
+        font-size: fontsSizes(p-legal);
+    }
+}
